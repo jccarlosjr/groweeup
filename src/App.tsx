@@ -8,7 +8,7 @@ import { Privacidade } from '@/pages/Privacidade'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollToHash />
       <Routes>
         <Route element={<Layout />}>
