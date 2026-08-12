@@ -25,4 +25,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://jccarlosjr.github.io/groweeup/sitemap.xml
+Sitemap: https://groweeup.com.br/groweeup/sitemap.xml
