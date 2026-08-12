@@ -12,7 +12,7 @@ export function Products() {
           eyebrow="Produtos"
           title={
             <>
-              Cinco frentes. <span className="text-gradient">Um sistema de crescimento.</span>
+              Seis frentes. <span className="text-gradient">Um sistema de crescimento.</span>
             </>
           }
           description="Do branding à mídia, do WhatsApp à infraestrutura Meta — cada produto reforça o próximo para acelerar resultados."
