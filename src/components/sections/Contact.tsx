@@ -144,11 +144,11 @@ export function Contact() {
               <div className="mt-10 border-t border-white/25 pt-6">
                 <p className="caption-mono text-white">Atendimento direto</p>
                 <a
-                  href="mailto:groweeup.mkt@gmail.com"
+                  href="mailto:contato@groweeup.com.br"
                   className="mt-3 inline-flex min-h-11 items-center gap-2 text-base text-white underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white"
                 >
                   <Mail className="size-4" aria-hidden />
-                  groweeup.mkt@gmail.com
+                  contato@groweeup.com.br
                 </a>
               </div>
             </div>

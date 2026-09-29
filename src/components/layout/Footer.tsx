@@ -116,10 +116,10 @@ export function Footer() {
           <ul className="space-y-3 text-sm text-text-secondary">
             <li>
               <a
-                href="mailto:groweeup.mkt@gmail.com"
+                href="mailto:contato@groweeup.com.br"
                 className="inline-flex min-h-11 items-center transition-colors duration-200 hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-600"
               >
-                groweeup.mkt@gmail.com
+                contato@groweeup.com.br
               </a>
             </li>
             <li>

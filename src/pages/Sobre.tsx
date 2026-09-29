@@ -4,9 +4,13 @@ import { ArrowRight, BarChart3, Code2, ShieldCheck, Zap } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { ImageLightbox } from '@/components/ui/ImageLightbox'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { products } from '@/data/products'
 import { reveal } from '@/lib/motion'
+import consignadoCase from '@/images/success-cases/consignado.jpeg'
+import portabilidadeCase from '@/images/success-cases/portabilidade.jpg'
+import whatsappCase from '@/images/success-cases/whatsapp.jpg'
 
 const values = [
   {
@@ -28,6 +32,24 @@ const values = [
     icon: Code2,
     title: 'Sistemas & Tecnologia',
     description: 'Desenvolvimento sob medida e automações para dar credibilidade e eficiência à sua empresa.',
+  },
+]
+
+const successCases = [
+  {
+    title: 'Disparo de mensagens para WhatsApp',
+    description: 'Disparo de mensagens para WhatsApp com o Growee Chat. Usamos os canais da Meta, sem risco de banimento.',
+    image: whatsappCase,
+  },
+  {
+    title: 'Simulador de portabilidade',
+    description: 'Consulta roteiro operacional de instituições financeiras cadastradas. Faça upload do extrato do seu cliente e tenha a simulação em instantes.',
+    image: portabilidadeCase,
+  },
+  {
+    title: 'Automação de whatsapp para consignado',
+    description: 'Simulação de proposta de empréstimo consignado conectando whatsapp. Tudo automatizado para você.',
+    image: consignadoCase,
   },
 ]
 
@@ -58,6 +80,35 @@ export function Sobre() {
             </Button>
           </div>
         </motion.div>
+      </section>
+
+      {/* Casos de Sucesso */}
+      <section className="py-16 md:py-24">
+        <div className="container-site">
+          <SectionHeading
+            eyebrow="Ferramentas desenvolvidas"
+            title="Casos de Sucesso"
+            description="Veja como nossas ferramentas ajudaram nossos clientes a crescer e alcançar seus objetivos."
+          />
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {successCases.map((s, i) => {
+              return (
+                <motion.div key={s.title} {...reveal(i * 0.05)}>
+                  <Card className="flex h-full flex-col justify-between">
+                    <div>
+                      <h3 className="font-display text-xl font-semibold tracking-tight text-text-primary">{s.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-text-secondary md:text-base">
+                        {s.description}
+                      </p>
+                    </div>
+                    <ImageLightbox src={s.image} alt={s.title} />
+                  </Card>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
       </section>
 
       {/* Services / Products Grid */}
