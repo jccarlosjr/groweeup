@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand colors (Azul elétrico) */
+  /* Brand: azul só no CTA e no foco */
   --brand-900: #0B3D89;
   --brand-600: #0064FF;
   --brand-300: #C2D9FC;
 
-  /* Neutral & Canvas */
-  --ink: #16191F;
-  --canvas: #F5F7FA;
+  /* Neutros com contraste AA */
+  --ink: #0F172A;
+  --canvas: #F8FAFC;
   --surface: #FFFFFF;
-  --border: #DDE3EC;
+  --border: #E2E8F0;
 
   /* Accents */
   --accent-amber: #E0793C;
@@ -30,7 +30,7 @@
   --color-accent-primary: var(--brand-600);
   --color-accent-glow: var(--brand-600);
   --color-text-primary: var(--ink);
-  --color-text-secondary: rgba(22, 25, 31, 0.7);
+  --color-text-secondary: #475569;
 }
 
 .dark {
@@ -43,7 +43,7 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
 
   --color-accent-glow: var(--brand-300);
-  --color-text-secondary: rgba(233, 238, 245, 0.7);
+  --color-text-secondary: #CBD5E1;
 }
 
 @theme {
@@ -73,13 +73,13 @@
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --radius-card: 16px;
-  --shadow-glow: 0 0 40px rgba(0, 100, 255, 0.25);
-  --shadow-glow-blue: 0 0 40px rgba(194, 217, 252, 0.2);
+  --radius-card: 12px;
+  --shadow-glow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-glow-blue: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 @layer base {
@@ -91,6 +91,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -112,11 +113,22 @@
     margin: 0;
     min-height: 100vh;
     font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
     background: var(--canvas);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  a,
+  button,
+  select,
+  summary,
+  [role='tab'],
+  [role='button'] {
+    cursor: pointer;
   }
 
   ::selection {
@@ -132,14 +144,11 @@
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-300) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: inherit;
   }
 
   .bg-gradient-signature {
-    background: linear-gradient(135deg, var(--brand-900) 0%, var(--brand-600) 100%);
+    background: var(--brand-900);
     color: #ffffff;
   }
 
@@ -159,10 +168,10 @@
   }
 
   .caption-mono {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 }

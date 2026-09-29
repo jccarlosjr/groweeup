@@ -10,9 +10,15 @@ export function Layout() {
 
   return (
     <div className="relative min-h-screen">
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[80] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Pular para o conteúdo
+      </a>
       <CursorGlow />
       <Header />
-      <main className="pt-20">
+      <main id="conteudo" className="pt-16">
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>
             <Outlet />

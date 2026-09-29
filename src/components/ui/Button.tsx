@@ -21,19 +21,24 @@ type Props =
   | (BaseProps & { to?: never; href?: never })
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-2xl font-display font-semibold transition-shadow cursor-pointer focus-visible:outline-none disabled:opacity-60 disabled:cursor-not-allowed'
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl font-semibold transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-600 disabled:opacity-60 disabled:cursor-not-allowed'
 
 const sizes: Record<Size, string> = {
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-7 py-3.5 text-base',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-6 py-3 text-base',
 }
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-gradient-signature text-white shadow-[0_0_0_0_rgba(0,100,255,0)] hover:shadow-[0_8px_32px_rgba(0,100,255,0.35)]',
+  primary: 'bg-brand-600 text-white hover:bg-brand-900',
   secondary:
-    'border border-border-subtle bg-bg-elevated/60 text-text-primary backdrop-blur-sm hover:border-accent-primary/50 hover:bg-bg-elevated',
+    'border border-border bg-surface text-ink hover:border-brand-600 hover:bg-canvas',
   ghost: 'text-text-secondary hover:text-text-primary',
+}
+
+const motionProps = {
+  whileHover: { y: -2 },
+  whileTap: { scale: 0.98 },
+  transition: { type: 'spring' as const, stiffness: 400, damping: 22 },
 }
 
 export function Button(props: Props) {
@@ -46,17 +51,13 @@ export function Button(props: Props) {
     onClick,
     type = 'button',
   } = props
+  const wide = className.includes('w-full')
   const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`
-
-  const motionProps = {
-    whileHover: { y: -2 },
-    whileTap: { scale: 0.98 },
-    transition: { type: 'spring' as const, stiffness: 400, damping: 22 },
-  }
+  const wrap = wide ? 'flex w-full' : 'inline-flex'
 
   if ('to' in props && props.to) {
     return (
-      <motion.div {...motionProps} className="inline-flex">
+      <motion.div {...motionProps} className={wrap}>
         <Link to={props.to} onClick={onClick} className={classes}>
           {children}
         </Link>
@@ -66,7 +67,7 @@ export function Button(props: Props) {
 
   if ('href' in props && props.href) {
     return (
-      <motion.div {...motionProps} className="inline-flex">
+      <motion.div {...motionProps} className={wrap}>
         <a href={props.href} onClick={onClick} className={classes}>
           {children}
         </a>
@@ -75,7 +76,13 @@ export function Button(props: Props) {
   }
 
   return (
-    <motion.button type={type} className={classes} disabled={disabled} onClick={onClick} {...motionProps}>
+    <motion.button
+      type={type}
+      className={classes}
+      disabled={disabled}
+      onClick={onClick}
+      {...motionProps}
+    >
       {children}
     </motion.button>
   )

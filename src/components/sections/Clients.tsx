@@ -1,41 +1,52 @@
 import { motion } from 'framer-motion'
 import { clients } from '@/data/content'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function Clients() {
-  const row = [...clients, ...clients]
+  const reduced = useReducedMotion()
+  const row = reduced ? clients : [...clients, ...clients]
 
   return (
-    <section className="relative overflow-hidden py-14 md:py-16" aria-label="Clientes">
-      <div className="container-site mb-8 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-end">
-        <div>
-          <p className="caption-mono text-accent-primary">Nossos Serviços</p>
-          <h2 className="mt-2 font-display text-xl font-semibold text-text-primary md:text-2xl">
-            Para escalar e crescer
-          </h2>
-        </div>
+    <section className="relative overflow-hidden border-y border-border py-10 md:py-12" aria-labelledby="frentes-titulo">
+      <div className="container-site mb-6">
+        <p id="frentes-titulo" className="caption-mono text-brand-900">
+          Frentes de trabalho
+        </p>
       </div>
 
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-bg-base to-transparent md:w-28" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-bg-base to-transparent md:w-28" />
-
-        <motion.div
-          className="flex w-max gap-4"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
-        >
-          {row.map((name, i) => (
-            <div
-              key={`${name}-${i}`}
-              className="flex h-16 min-w-[160px] items-center justify-center rounded-2xl border border-border-subtle bg-bg-surface/70 px-6"
+      {reduced ? (
+        <ul className="container-site flex flex-wrap gap-2">
+          {row.map((name) => (
+            <li
+              key={name}
+              className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-text-secondary"
             >
-              <span className="font-display text-sm font-semibold tracking-wide text-text-secondary/90 uppercase">
-                {name}
-              </span>
-            </div>
+              {name}
+            </li>
           ))}
-        </motion.div>
-      </div>
+        </ul>
+      ) : (
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-canvas to-transparent md:w-28" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-canvas to-transparent md:w-28" />
+          <motion.ul
+            className="flex w-max gap-4"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+          >
+            {row.map((name, i) => (
+              <li
+                key={`${name}-${i}`}
+                className="flex h-16 min-w-[180px] items-center justify-center rounded-2xl border border-border bg-surface px-6"
+              >
+                <span className="text-sm font-semibold tracking-wide text-text-secondary uppercase">
+                  {name}
+                </span>
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+      )}
     </section>
   )
 }

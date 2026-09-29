@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { ArrowRight, BarChart3, Code2, ShieldCheck, Zap } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { products } from '@/data/products'
-import logoMark from '@/assets/logo-dark.png'
+import { reveal } from '@/lib/motion'
 
 const values = [
   {
@@ -35,44 +35,29 @@ export function Sobre() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-28">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-70"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 55% at 50% -10%, rgba(0, 102, 255, 0.22), transparent)',
-          }}
-        />
-        <div className="container-site relative grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <Badge>Sobre a Growee Up</Badge>
-            <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
-              Crescemos marcas com <span className="text-gradient">método e dados</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-text-secondary md:text-lg">
-              Somos uma agência de marketing e desenvolvimento focada em criar soluções para empresas de diferentes nichos e portes. Trabalhamos com marketing, tráfego pago, CRM para WhatsApp, redes sociais e desenvolvimento de sistemas — tudo orquestrado para gerar resultado mensurável.
-            </p>
-            <div className="mt-8">
-              <Button to="/#contato" size="lg">
-                Falar com o time
-                <ArrowRight className="size-4" />
-              </Button>
-            </div>
+      <section className="border-b border-border bg-surface pt-16 pb-16 md:pt-20 md:pb-20">
+        <motion.div
+          className="container-site max-w-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Badge>Sobre a Growee Up</Badge>
+          <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-5xl">
+            Crescemos marcas com método e dados
+          </h1>
+          <p className="mt-5 max-w-[65ch] text-lg leading-relaxed text-text-secondary">
+            Somos uma agência de marketing e desenvolvimento focada em empresas de diferentes nichos
+            e portes. Trabalhamos com marketing, tráfego pago, CRM para WhatsApp, redes sociais e
+            sistemas — no mesmo plano, com resultado mensurável.
+          </p>
+          <div className="mt-8">
+            <Button to="/#contato" size="lg">
+              Falar com o time
+              <ArrowRight className="size-4" aria-hidden />
+            </Button>
           </div>
-          <motion.div
-            className="relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="absolute inset-10 rounded-[2rem] border border-border-subtle bg-bg-elevated/50 shadow-[0_0_50px_rgba(0,102,255,0.15)]" />
-            <img
-              src={logoMark}
-              alt="Growee Up"
-              className="relative z-10 h-40 w-40 object-contain drop-shadow-[0_20px_50px_rgba(0,102,255,0.4)]"
-            />
-          </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Services / Products Grid */}
@@ -87,18 +72,12 @@ export function Sobre() {
             {products.map((p, i) => {
               const Icon = p.icon
               return (
-                <motion.div
-                  key={p.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                >
+                <motion.div key={p.id} {...reveal(i * 0.05)}>
                   <Card className="flex h-full flex-col justify-between">
                     <div>
                       <div className="mb-5 flex items-start justify-between gap-4">
-                        <div className="inline-flex size-12 items-center justify-center rounded-2xl border border-border-subtle bg-bg-elevated text-accent-primary shadow-[0_0_24px_rgba(0,100,255,0.15)]">
-                          <Icon className="size-5" />
+                        <div className="inline-flex size-11 items-center justify-center rounded-xl border border-border bg-canvas text-brand-600">
+                          <Icon className="size-5" aria-hidden />
                         </div>
                         <div className="flex flex-wrap justify-end gap-2">
                           {p.tags.map((tag) => (
@@ -120,9 +99,9 @@ export function Sobre() {
                     </div>
                     <Link
                       to="/#produtos"
-                      className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-primary hover:text-accent-glow transition-colors"
+                      className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-brand-600 transition-colors duration-200 hover:text-brand-900 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-600"
                     >
-                      Ver detalhes na home <ArrowRight className="size-3.5" />
+                      Ver detalhes na home <ArrowRight className="size-3.5" aria-hidden />
                     </Link>
                   </Card>
                 </motion.div>
@@ -146,16 +125,10 @@ export function Sobre() {
             {values.map((v, i) => {
               const Icon = v.icon
               return (
-                <motion.div
-                  key={v.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <Card className="h-full">
-                    <div className="mb-5 inline-flex size-11 items-center justify-center rounded-2xl border border-border-subtle bg-bg-elevated text-accent-glow shadow-[0_0_24px_rgba(0,100,255,0.15)]">
-                      <Icon className="size-5" />
+                <motion.div key={v.title} {...reveal(i * 0.06)}>
+                  <Card className="h-full" hover={false}>
+                    <div className="mb-5 inline-flex size-11 items-center justify-center rounded-xl border border-border bg-canvas text-brand-600">
+                      <Icon className="size-5" aria-hidden />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">{v.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-text-secondary md:text-base">
@@ -178,7 +151,7 @@ export function Sobre() {
                 <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
                   Pronto para alavancar seu negócio?
                 </h2>
-                <p className="mt-3 max-w-xl text-base text-white/80">
+                <p className="mt-3 max-w-xl text-base text-white">
                   Conte o momento da sua empresa e vamos montar uma proposta objetiva com metas e prioridades claras.
                 </p>
               </div>
@@ -186,7 +159,7 @@ export function Sobre() {
                 to="/#contato"
                 variant="secondary"
                 size="lg"
-                className="shrink-0 border-white/20 bg-white text-brand-950 hover:bg-white/90"
+                className="shrink-0 border-white bg-white text-brand-900 hover:bg-canvas"
               >
                 Falar com a gente
               </Button>

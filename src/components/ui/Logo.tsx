@@ -17,7 +17,7 @@ export function Logo({ className = '', showWordmark = true, size = 'md' }: Props
   return (
     <Link
       to="/"
-      className={`inline-flex items-center gap-3 transition-opacity hover:opacity-90 ${className}`}
+      className={`inline-flex items-center gap-3 rounded-md transition-opacity duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-600 ${className}`}
       aria-label="Growee Up — página inicial"
     >
       {showWordmark ? (

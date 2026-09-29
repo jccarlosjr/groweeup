@@ -10,7 +10,7 @@ type Props = {
 export function Card({ children, className = '', hover = true }: Props) {
   return (
     <motion.div
-      className={`group relative overflow-hidden rounded-[var(--radius-card)] border border-border-subtle bg-bg-surface/80 p-6 backdrop-blur-sm ${className}`}
+      className={`group relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface p-6 shadow-sm ${className}`}
       whileHover={hover ? { y: -4 } : undefined}
       transition={{ type: 'spring', stiffness: 320, damping: 24 }}
     >
@@ -23,10 +23,6 @@ export function Card({ children, className = '', hover = true }: Props) {
         aria-hidden
       />
       <div className="relative z-10">{children}</div>
-      <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 shadow-[inset_0_0_0_1px_rgba(194,217,252,0.35)] transition-opacity duration-300 group-hover:opacity-100"
-        aria-hidden
-      />
     </motion.div>
   )
 }

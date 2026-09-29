@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { reveal } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,7 +25,7 @@ const steps = [
     n: '03',
     title: 'Execução',
     description:
-      'Implementamos as estratégias definidas com organização,  clareza e foco total nos seus objetivos.',
+      'Implementamos as estratégias definidas com organização, clareza e foco total nos seus objetivos.',
   },
   {
     n: '04',
@@ -64,16 +65,12 @@ export function Process() {
   }, [reduced])
 
   return (
-    <section ref={sectionRef} className="relative py-20 md:py-28" id="processo">
+    <section ref={sectionRef} className="scroll-mt-20 py-20 md:py-24" id="processo">
       <div className="container-site">
         <SectionHeading
           eyebrow="Como trabalhamos"
-          title={
-            <>
-              Um processo feito para <span className="text-gradient">aprender rápido</span>
-            </>
-          }
-          description="Quatro etapas que conectam estratégia e operação — com feedback loops curtos e decisões baseadas em dados."
+          title="Um processo feito para aprender rápido"
+          description="Quatro etapas que conectam estratégia e operação, com decisões baseadas em dados."
         />
 
         <div className="relative mt-16 grid gap-8 md:grid-cols-[48px_1fr] md:gap-12">
@@ -82,7 +79,7 @@ export function Process() {
             <div
               ref={lineRef}
               className="absolute top-3 bottom-3 left-1/2 w-px origin-top -translate-x-1/2 bg-gradient-to-b from-accent-primary to-accent-glow"
-              style={{ transform: 'scaleY(0)' }}
+              style={reduced ? undefined : { transform: 'scaleY(0)' }}
             />
           </div>
 
@@ -90,19 +87,14 @@ export function Process() {
             {steps.map((step, i) => (
               <motion.li
                 key={step.n}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="relative rounded-[var(--radius-card)] border border-border-subtle bg-bg-surface/70 p-6 backdrop-blur-sm"
+                className="rounded-[var(--radius-card)] border border-border bg-surface p-6"
+                {...reveal(i * 0.08)}
               >
-                <span className="caption-mono text-accent-glow">{step.n}</span>
+                <span className="caption-mono text-brand-600">{step.n}</span>
                 <h3 className="mt-3 font-display text-2xl font-semibold text-text-primary">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary md:text-base">
-                  {step.description}
-                </p>
+                <p className="mt-3 text-base leading-relaxed text-text-secondary">{step.description}</p>
               </motion.li>
             ))}
           </ol>
